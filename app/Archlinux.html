@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>Archlinux</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,36 +69,151 @@
 
     <div class="container content">
 		
+<h1 id="toc_1">Archlinux</h1>
 
-<h1 id="toc_1">My knowledge base</h1>
+<p>
+Mes notes sur l'installation d'Archlinux
+</p>
+ 
 
+<h2 id="toc_1.1">Installation from scratch</h2>
 <ul>
 <li>
-<a href="Archlinux.html">Archlinux</a>
+Attention de ne pas lancer l'utilitaire de partitionement sur une partition mais bien sur le disque lui même
 
 <li>
-<a href="github.html">github</a>
-
-<li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
+Pour le macbook voir <a href="https://wiki.archlinux.org/index.php/MacBook">https://wiki.archlinux.org/index.php/MacBook</a>
 
 </ul>
- 
+<h3 id="toc_1.1.1">Notes à propos de VMware et Virtualbox</h3>
+<ul>
+<li>
+pb sur le driver video suite à l'upgrade -&gt; obligé de réinstaller les anciens pilotes
+   ex : <code>pacman -U /var/cache/pacman/pkg/xf86-video-intel-2.99.912-1-x86_64.pkg.tar.xz</code>
+
+</ul>
+<h2 id="toc_1.2">Customisation</h2>
+<h3 id="toc_1.2.1">Les paquets indispensables</h3>
+<ul>
+<li>
+dmenu-xft-height (pour paramétrer la couleuur/hauteur)
+
+<li>
+dunst pour avoir des notifications
+
+<li>
+dwb comme navigateur web
+
+<li>
+feh pour gérer l'image du fond
+
+<li>
+hot-solarized-vi pour un top colorisée avec raccourcis vi
+
+<li>
+slim pour avoir un écran de login
+
+<li>
+llpp-git pour visualiser des pdf
+
+<li>
+otf-inconsolata-powerline-git (police avec support powerline)
+
+<li>
+otf-powerline-symbols-git (police avec support powerline)
+
+<li>
+pinta logiciel de retouche image
+
+<li>
+pommed-light pour gérer les touches mac sons/lumieres
+
+<li>
+xclip &amp; xqel pour gérer les copier/collé
+
+</ul>
+<h3 id="toc_1.2.2">I3 window manager</h3>
+<ul>
+<li>
+i3pystatus-git pour des infos dans la barre de menu
+
+</ul>
+<h3 id="toc_1.2.3">Police de caractère</h3>
+<h3 id="toc_1.2.4">Thème Solarized, airline et GTK</h3>
+<h3 id="toc_1.2.5">Barre de status</h3>
+<ul>
+<li>
+<a href="configuration de i3pystatus-git.html">configuration de i3pystatus-git</a>  
+
+</ul>
+<h3 id="toc_1.2.6">Barre de lancement</h3>
+<ul>
+<li>
+installation de dmenu-xft-height puis customisation dans ~/.config/i3/config :
+   <code>bindsym $mod+d exec dmenu_run -i -nb '#859900' -nf '#eee8d5' -sb '#cb4b16' -fn 'Meslo LG S DZ for Powerline-10' -h 24</code>
+
+</ul>
+<h3 id="toc_1.2.7">Ajout de règle udev</h3>
 <p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
+ Lancer un script à la connexion/deconnexion d'un périphérique :
 </p>
+<ul>
+<li>
+voir <a href="https://wiki.archlinux.org/index.php/udev">https://wiki.archlinux.org/index.php/udev</a>
+
+<li>
+créer un script se terminannt par .rules
+
+<li>
+copier un script déjà existant : /usr/lib/udev/rules.d/70-power-switch.rules
+
+<li>
+voir les infos du device <code># udevadm info -a -p /sys/class/backlight/acpi_video0</code>
+
+<li>
+modfier la régle copier avec les info récupérée
+
+<li>
+faire <code>udevadm trigger</code> si la règle n'est pas prise en compte
+
+<li>
+si la règle ne fonctionne pas faire un <code># udevadm test $(udevadm info -q path -n [device name]) 2&gt;&amp;1</code>
+
+</ul>
+<h3 id="toc_1.2.8">Installation Trackpad</h3>
+<ul>
+<li>
+voir <a href="https://wiki.archlinux.org/index.php/bluetooth">https://wiki.archlinux.org/index.php/bluetooth</a>
+
+<li>
+et voir <a href="http://support.apple.com/kb/HT2845">http://support.apple.com/kb/HT2845</a>
+   Turn on the Magic Trackpad by pressing the on/off button until the indicator light comes on. The indicator light glows steadily for 2 to 3 seconds to indicate the batteries are good. After that, the light will blink to indicate your trackpad is in discovery mode.
+
+<li>
+ajouter une <a href="conf X11 trackpad.html">conf X11 trackpad</a>
+
+</ul>
+<h3 id="toc_1.2.9">Connexion Freebox OpenVPN</h3>
+<ul>
+<li>
+copier le fichier utilisateur de la freebox  <code>cp ~/downloads/config_openvpn_bridge_{$USER}.ovpn /etc/openvpn/freebox.conf</code>
+
+<li>
+créer le fichier reseau pour <a href="openvpnclient.html">openvpnclient</a> pour l'interface virtuel dans <code>/etc/netctl</code> voir <a href="https://wiki.archlinux.org/index.php/OpenVPN_Bridge">https://wiki.archlinux.org/index.php/OpenVPN_Bridge</a> (mais ne pas installé le fichier bridge que tap)
+
+<li>
+démarrer l'interface <code>netctl enable openvpn_tap</code>
+
+<li>
+démarrer le service <code>systemctl start openvpn@freebox.service</code>
+
+<li>
+puis <code>dhcpd tap0</code> pour obtenir une ip
+
+<li>
+si pb pour obtenir l'adresse ip, redémarrer faire un <code>systemctl restart dhcpcd</code>
+
+</ul>
 
 	</div>
 	<!-- /container -->

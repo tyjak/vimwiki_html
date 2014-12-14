@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>conf X11 trackpad</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,36 +69,17 @@
 
     <div class="container content">
 		
+<h2 id="toc_0.1">fichier /etc/X11/xorg.conf.d/10-magicktrackpad.conf</h2>
 
-<h1 id="toc_1">My knowledge base</h1>
-
-<ul>
-<li>
-<a href="Archlinux.html">Archlinux</a>
-
-<li>
-<a href="github.html">github</a>
-
-<li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
-
-</ul>
- 
-<p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
-</p>
+<pre>
+Section "InputClass"
+ Identifier "Magic Trackpad"
+ MatchUSBID "05ac:030e"
+ Driver "evdev"
+ MatchIsTouchpad "on"
+ MatchDevicePath "dev/input/event/*"
+EndSection
+</pre>
 
 	</div>
 	<!-- /container -->

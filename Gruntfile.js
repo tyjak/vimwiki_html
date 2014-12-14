@@ -342,7 +342,22 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
-    }
+    },
+
+	buildcontrol: {
+		options: {
+		  dir: 'dist',
+		  commit: true,
+		  push: true,
+		  message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+		},
+		pages: {
+		  options: {
+			remote: 'git@github.com:tyjak/tyjak.github.io.git',
+			branch: 'master'
+		  }
+		},
+	  }
   });
 
 
@@ -397,7 +412,8 @@ module.exports = function (grunt) {
     'modernizr',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+	'buildcontrol:pages'
   ]);
 
   grunt.registerTask('default', [

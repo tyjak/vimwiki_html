@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>Vimwiki2html</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,35 +69,96 @@
 
     <div class="container content">
 		
+<h1 id="toc_1">Vimwiki as your personal website</h1>
 
-<h1 id="toc_1">My knowledge base</h1>
-
-<ul>
-<li>
-<a href="Archlinux.html">Archlinux</a>
-
-<li>
-<a href="github.html">github</a>
-
-<li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
-
-</ul>
- 
 <p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
+Use vimwiki as your favorite publishing tool !
+</p>
+
+<h2 id="toc_1.1">Vimwiki settings</h2>
+
+<pre>
+"vimwiki 
+let mainWiki = {}
+let mainWiki.path = '~/vimwiki/'
+let mainWiki.template_path = '~/sites/tyjak.github.io/templates'
+let mainWiki.template_default = 'default'
+let mainWiki.template_ext = '.tpl'
+let mainWiki.path_html = '~/sites/tyjak.github.io/app' 
+
+let g:vimwiki_list = [mainWiki]
+</pre>
+
+<h2 id="toc_1.2">Publish with yeoman</h2>
+
+<p>
+Yeoman is <em>the web's scaffolding tool for modern webapps</em>.
+Built on node.js, it inludes yo, bower ans grunt
+</p>
+
+<h3 id="toc_1.2.1">Install yeoman</h3>
+<pre>
+ $ npm install -g yo bower 
+</pre>
+  
+<h3 id="toc_1.2.2">Install a generator</h3>
+
+<p>
+Choose your prefer webapp environement.
+Generator-webapp is Html5boilerplate qith Jquery, Modernizer and Bootstrap
+</p>
+
+<pre>
+ $ npm install -g generator-webapp
+</pre>
+  
+<h3 id="toc_1.2.3">Finaly get started</h3>
+
+<p>
+Go to your project directory and run :
+</p>
+
+<pre>
+ $ yo webapp
+</pre>
+
+<h3 id="toc_1.2.4">Template</h3>
+
+<p>
+Add a directory templates in root of the porject.
+Copy <code>app/index.html</code> to <code>templates/default.tpl</code> 
+</p>
+
+<p>
+Put those two vimwiki vars in your template :
+</p>
+<pre>
+	&lt;title&gt;%title&lt;/title&gt;
+	&lt;body&gt;%content&lt;/body&gt;
+</pre>
+
+<h3 id="toc_1.2.5">Preview your wiki</h3>
+
+<p>
+In the directory of the project launch:
+</p>
+<pre>
+	$ grunt serve
+</pre>
+
+<h3 id="toc_1.2.6">Release</h3>
+
+<p>
+In the directory of the project launch:
+</p>
+<pre>
+	$ grunt build
+</pre>
+  
+<h3 id="toc_1.2.7">TODO</h3>
+
+<p>
+Add git commit, push into the build process
 </p>
 
 	</div>

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>configuration de i3pystatus-git</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,36 +69,86 @@
 
     <div class="container content">
 		
+<h3 id="toc_0.0.1">Configuration de la barre de status dans i3w</h3>
 
-<h1 id="toc_1">My knowledge base</h1>
-
-<ul>
-<li>
-<a href="Archlinux.html">Archlinux</a>
-
-<li>
-<a href="github.html">github</a>
-
-<li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
-
-</ul>
- 
 <p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
+Pour la configuration de la barre de status j'utilise i3pystatus qui offre plus d'option que i3status.
+La configuration dans ~/.config/i3/config :
 </p>
+<pre>
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  status_command python ~/.config/i3/status.py
+	position top
+  colors {
+    separator #93a1a1
+    background #002b36
+    statusline #93a1a1
+    focused_workspace #eee8d5 #859900 #eee8d5
+    active_workspace #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace #073642 #eee8d5 #002b36
+    urgent_workspace #d33682 #d33682 #fdf6e3
+  }
+}
+
+</pre>
+
+<h2 id="toc_0.1">les élements de la barre de status</h2>
+<p>
+Pour configurer les éléments de la barre de status, il suffit d'éditer le fichier suivant : ~/.config/i3/status.py
+</p>
+
+<pre>
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+from i3pystatus import Status
+
+status = Status(standalone=True)
+
+# Displays clock like this:
+# Tue 30 Jul 11:59:46 PM KW31
+#                          ^-- calendar week
+status.register("clock")
+
+# Show sound
+status.register("alsa")
+
+# Show battery
+status.register("battery",
+	format="{remaining} {status}")
+
+# Show network
+status.register("network",
+	interface="wlp2s0"
+	)
+#Show backlight
+status.register("backlight",
+	format="{percentage}%")
+
+# Shows the average load of the last minute and the last 5 minutes
+# (the default value for format is used)
+status.register("load")
+
+# Shows disk usage of /
+# Format:
+# 42/128G [86G]
+status.register("disk",
+    path="/",
+    #format="{used}/{total}G [{avail}G]",)
+    format="{avail}G",)
+
+# Show weather
+status.register("weather",
+        location_code="FRXX5264",
+        colorize=True,
+        format="{current_temp} {current_wind} {humidity}%",)
+
+status.run()
+</pre>
 
 	</div>
 	<!-- /container -->

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>Postfix</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,36 +69,47 @@
 
     <div class="container content">
 		
+<h1 id="toc_1">Postfix</h1>
+<h2 id="toc_1.1">Trucs et astuces pour postfix</h2>
 
-<h1 id="toc_1">My knowledge base</h1>
+<h4 id="toc_1.1.0.1">restriction de reception pour un domaine (à tester)</h4>
 
-<ul>
-<li>
-<a href="Archlinux.html">Archlinux</a>
-
-<li>
-<a href="github.html">github</a>
-
-<li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
-
-</ul>
- 
 <p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
+The instructions for doing this type of thing are documented here.
+<a href="http://www.postfix.org/RESTRICTION_CLASS_README.html">http://www.postfix.org/RESTRICTION_CLASS_README.html</a>
 </p>
+
+<p>
+try something like this in 
+</p>
+
+<p>
+	<code>/etc/postfix/main.cf</code> :
+</p>
+<pre class="brush: sh">
+    smtpd_recipient_restrictions =
+        check_client_access hash:/etc/postfix/inside_ips
+        ...the usual stuff...
+
+        smtpd_restriction_classes = insiders_only
+        insiders_only = check_sender_access hash:/etc/postfix/insiders, reject
+</pre>
+
+<p>
+	<code>/etc/postfix/inside_ips</code> : 
+</p>
+<pre class="brush: sh">
+            192.168.1   insiders_only
+            192.168.2   insiders_only
+</pre>
+  
+<p>
+	<code>/etc/postfix/insiders</code> :
+</p>
+<pre class="brush: sh">
+        my.domain       OK  matches my.domain and subdomains
+        another.domain  OK  matches another.domain and subdomains
+</pre>
 
 	</div>
 	<!-- /container -->

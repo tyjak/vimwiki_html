@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tyjak notes</title>
+        <title>Vim</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,36 +69,44 @@
 
     <div class="container content">
 		
-
-<h1 id="toc_1">My knowledge base</h1>
-
+<h1 id="toc_1">Vim tips</h1>
+<h2 id="toc_1.1">NEW</h2>
 <ul>
 <li>
-<a href="Archlinux.html">Archlinux</a>
+,&lt;CR&gt; pour supprimer le highlight de la recherche
 
 <li>
-<a href="github.html">github</a>
+&lt;SPACE&gt; pour faire une recheche (/)
 
 <li>
-<a href="Python.html">Python</a>
-
-<li>
-<a href="Vim.html">Vim</a>
-
-<li>
-<a href="Postfix.html">Postfix</a>
-
-<li>
-<a href="Open Source Alt.html">Open Source Alt</a>
-
-<li>
-<a href="Vimwiki2html.html">Vimwiki2html</a>
+&lt;SHIFT&gt;&lt;SPACE&gt; recherche inverse (?)
 
 </ul>
- 
-<p>
- <img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png" alt="Vimwiki" class="center-block" />
-</p>
+<h2 id="toc_1.2">Divers</h2>
+<ul>
+<li>
+[<a href="http://vimwiki.googlecode.com/hg/misc/vimwikiqrc.pdf">http://vimwiki.googlecode.com/hg/misc/vimwikiqrc.pdf</a> vimwiki refcards]
+
+<li>
+<code>set wildmenu; set wildmode=list:longest,full "grande liste pour l'autocompletion</code>
+
+<li>
+<code>:w !tee %</code> pour forcer l'enregistrement si l'utilisateur courant n'a pas les droits
+
+<li>
+<code>set ignorecase</code> et <code>set smartcase</code> pour des recherhes exact seulement si le motif contient un mix min/maj
+
+<li>
+<code>set gdefault</code> pour remplacer par défaut tous les motifs de la ligne
+  <a href="http://stevelosh.com/blog/2010/09/coming-home-to-vim/">http://stevelosh.com/blog/2010/09/coming-home-to-vim/</a>
+
+<li>
+supprimer le message d'accueil <code>set shortmess=+I</code>
+
+<li>
+<code>&lt;C-r&gt;=</code> expression register
+
+</ul>
 
 	</div>
 	<!-- /container -->
