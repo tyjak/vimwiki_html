@@ -351,6 +351,12 @@ module.exports = function (grunt) {
 		  push: true,
 		  message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
 		},
+		local: {
+		  options: {
+			remote: '.',
+			branch: 'master'
+		  }
+		},
 		pages: {
 		  options: {
 			remote: 'git@github.com:tyjak/tyjak.github.io.git',
