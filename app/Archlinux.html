@@ -13,6 +13,7 @@
 		<!-- build:css(.) styles/vendor.css -->
 		<!-- bower:css -->
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:css(.tmp) styles/main.css -->
@@ -93,8 +94,23 @@ pb sur le driver video suite à l'upgrade -&gt; obligé de réinstaller les anci
 
 </ul>
 <h2 id="toc_1.2">Customisation</h2>
-<h3 id="toc_1.2.1">Les paquets indispensables</h3>
+<h3 id="toc_1.2.1">Installation de yaourt</h3>
+<p>
+Dans /etc/pacman.conf :
+</p>
+<pre>
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+</pre>
+<p>
+puis installer avec <code>pacman -Sy yaourt</code>
+</p>
+<h3 id="toc_1.2.2">Les paquets indispensables</h3>
 <ul>
+<li>
+i3-wm gestionnaire de fenêtre
+
 <li>
 dmenu-xft-height (pour paramétrer la couleuur/hauteur)
 
@@ -129,31 +145,34 @@ pinta logiciel de retouche image
 pommed-light pour gérer les touches mac sons/lumieres
 
 <li>
-xclip &amp; xqel pour gérer les copier/collé
+xclip &amp; xsel pour gérer les copier/collé
+
+<li>
+nuvolaplayer pour la musique en ligne
 
 </ul>
-<h3 id="toc_1.2.2">I3 window manager</h3>
+<h3 id="toc_1.2.3">I3 window manager</h3>
 <ul>
 <li>
 i3pystatus-git pour des infos dans la barre de menu
 
 </ul>
-<h3 id="toc_1.2.3">Police de caractère</h3>
-<h3 id="toc_1.2.4">Thème Solarized, airline et GTK</h3>
-<h3 id="toc_1.2.5">Barre de status</h3>
+<h3 id="toc_1.2.4">Police de caractère</h3>
+<h3 id="toc_1.2.5">Thème Solarized, airline et GTK</h3>
+<h3 id="toc_1.2.6">Barre de status</h3>
 <ul>
 <li>
 <a href="configuration de i3pystatus-git.html">configuration de i3pystatus-git</a>  
 
 </ul>
-<h3 id="toc_1.2.6">Barre de lancement</h3>
+<h3 id="toc_1.2.7">Barre de lancement</h3>
 <ul>
 <li>
 installation de dmenu-xft-height puis customisation dans ~/.config/i3/config :
    <code>bindsym $mod+d exec dmenu_run -i -nb '#859900' -nf '#eee8d5' -sb '#cb4b16' -fn 'Meslo LG S DZ for Powerline-10' -h 24</code>
 
 </ul>
-<h3 id="toc_1.2.7">Ajout de règle udev</h3>
+<h3 id="toc_1.2.8">Ajout de règle udev</h3>
 <p>
  Lancer un script à la connexion/deconnexion d'un périphérique :
 </p>
@@ -180,7 +199,7 @@ faire <code>udevadm trigger</code> si la règle n'est pas prise en compte
 si la règle ne fonctionne pas faire un <code># udevadm test $(udevadm info -q path -n [device name]) 2&gt;&amp;1</code>
 
 </ul>
-<h3 id="toc_1.2.8">Installation Trackpad</h3>
+<h3 id="toc_1.2.9">Installation Trackpad</h3>
 <ul>
 <li>
 voir <a href="https://wiki.archlinux.org/index.php/bluetooth">https://wiki.archlinux.org/index.php/bluetooth</a>
@@ -193,16 +212,18 @@ et voir <a href="http://support.apple.com/kb/HT2845">http://support.apple.com/kb
 ajouter une <a href="conf X11 trackpad.html">conf X11 trackpad</a>
 
 </ul>
-<h3 id="toc_1.2.9">Connexion Freebox OpenVPN</h3>
+<h3 id="toc_1.2.10">Connexion Freebox OpenVPN</h3>
+<h4 id="toc_1.2.10.1" class="justcenter">Configuration</h4>
 <ul>
 <li>
 copier le fichier utilisateur de la freebox  <code>cp ~/downloads/config_openvpn_bridge_{$USER}.ovpn /etc/openvpn/freebox.conf</code>
 
 <li>
-créer le fichier reseau pour <a href="openvpnclient.html">openvpnclient</a> pour l'interface virtuel dans <code>/etc/netctl</code> voir <a href="https://wiki.archlinux.org/index.php/OpenVPN_Bridge">https://wiki.archlinux.org/index.php/OpenVPN_Bridge</a> (mais ne pas installé le fichier bridge que tap)
+créer le fichier reseau pour <a href="openvpnclient.html">openvpnclient</a> pour l'interface virtuel dans <code>/etc/netctl</code> voir <a href="https://wiki.archlinux.org/index.php/OpenVPN_Bridge">https://wiki.archlinux.org/index.php/OpenVPN_Bridge</a> (mais ne pas installer le fichier bridge que tap)
 
 <li>
 démarrer l'interface <code>netctl enable openvpn_tap</code>
+    ==== Demarrage ====
 
 <li>
 démarrer le service <code>systemctl start openvpn@freebox.service</code>
@@ -212,6 +233,50 @@ puis <code>dhcpd tap0</code> pour obtenir une ip
 
 <li>
 si pb pour obtenir l'adresse ip, redémarrer faire un <code>systemctl restart dhcpcd</code>
+
+</ul>
+<p>
+=======
+</p>
+<ul>
+<li>
+créer les fichiers reseaux pour <a href="openvpnclient.html">openvpnclient</a> pour l'interface virtuel dans <code>/etc/netctl</code> voir <a href="https://wiki.archlinux.org/index.php/OpenVPN_Bridge">https://wiki.archlinux.org/index.php/OpenVPN_Bridge</a>
+
+<li>
+monter l'interface <code>netctl enable openvpn_tap</code> et <code>netctl enable openvpn_bridge</code>
+
+<li>
+démarrer le service <code>systemctl start openvpn@freebox.service</code>
+
+<li>
+puis <code>dhcpd</code> pour obtenir une ip
+
+</ul>
+<h3 id="toc_1.2.11">Changer le navigateur web par défault</h3>
+<ul>
+<li>
+installer <code>xdg-utils</code>
+
+<li>
+créer le dossier pour les mimes types <code>mkdir ~/.local/share/applications</code>
+
+<li>
+puis executer la commande <code>xdg-mime default dwb.desktop x-scheme-handler/http</code> pour avoir dwb par défaut
+
+<li>
+plus d'info : <a href="https://wiki.archlinux.org/index.php/xdg-open#Set_the_default_browser">https://wiki.archlinux.org/index.php/xdg-open#Set_the_default_browser</a>
+
+</ul>
+<h3 id="toc_1.2.12">Régler un pb (TODO)</h3>
+<ul>
+<li>
+journal des événements <code>journalctl -xn</code>
+
+<li>
+<code>journalctl -f</code> pour voir tous ce qui se passe
+
+<li>
+<code>journalctl -n -u bluetooth</code> pour voir les derniers logs concernant le bluetooth
 
 </ul>
 
